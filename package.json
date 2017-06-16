@@ -1,0 +1,16 @@
+{
+  "name": "@tasks/back-end",
+  "version": "1.0.0",
+  "description": "The Tasks back-end",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fvilers/tasks-back-end.git"
+  },
+  "keywords": [],
+  "author": "Fabian Vilers <fabian.vilers@dev-one.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fvilers/tasks-back-end/issues"
+  },
+  "homepage": "https://github.com/fvilers/tasks-back-end#readme"
+}
