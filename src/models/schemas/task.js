@@ -19,7 +19,7 @@ const schema = new mongoose.Schema({
     required: true,
     type: String,
     validate: {
-      validator: /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test
+      validator: value => /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(value)
     }
   }
 }, options);
