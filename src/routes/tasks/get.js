@@ -7,8 +7,8 @@ function getTask (req, res, next) {
   const query = {
     _id: req.params.id,
     userId: req.params.userId
-  }
-  
+  };
+
   Task.findOne(query)
     .then(sendResponse)
     .catch(next)
