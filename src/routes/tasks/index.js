@@ -11,7 +11,8 @@ router.param('id', (req, res, next, val) => {
 });
 
 router.get('/', require('./list'));
-router.get('/:id', require('./get'));
 router.post('/', require('./create'));
+router.get('/:id', require('./get'));
+router.put('/:id', require('./update'));
 
 module.exports = Object.freeze(router);
