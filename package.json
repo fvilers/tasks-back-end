@@ -20,7 +20,8 @@
   "dependencies": {
     "compression": "1.6.2",
     "debug": "2.6.8",
-    "express": "4.15.3"
+    "express": "4.15.3",
+    "helmet": "3.6.1"
   },
   "devDependencies": {
     "cross-env": "5.0.1",
