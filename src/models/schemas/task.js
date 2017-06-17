@@ -14,7 +14,7 @@ const schema = new mongoose.Schema({
     default: false,
     type: Boolean
   },
-  listId: {
+  userId: {
     index: true,
     required: true,
     type: String
