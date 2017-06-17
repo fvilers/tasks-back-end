@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/fvilers/tasks-back-end#readme",
   "dependencies": {
+    "compression": "1.6.2",
     "debug": "2.6.8",
     "express": "4.15.3"
   },
