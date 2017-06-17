@@ -2,7 +2,7 @@
 
 const express = require('express');
 const compression = require('compression');
-const helmet = require('compression');
+const helmet = require('helmet');
 const mongoose = require('mongoose');
 const configuration = require('./configuration');
 const app = express();
