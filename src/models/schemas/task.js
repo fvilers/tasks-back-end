@@ -17,7 +17,10 @@ const schema = new mongoose.Schema({
   userId: {
     index: true,
     required: true,
-    type: String
+    type: String,
+    validate: {
+      validator: /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test
+    }
   }
 }, options);
 
