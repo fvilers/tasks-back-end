@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const cors = require('cors');
 const compression = require('compression');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
@@ -9,6 +10,7 @@ const configuration = require('./configuration');
 const app = express();
 
 // Middlewares
+app.use(cors(configuration.cors));
 app.use(compression());
 app.use(helmet());
 app.use(bodyParser.json(configuration.json));
