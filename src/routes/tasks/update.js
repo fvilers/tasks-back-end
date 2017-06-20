@@ -3,6 +3,7 @@
 const createError = require('http-errors');
 const kue = require('kue');
 const Task = require('../../models/task');
+const configuration = require('../../configuration');
 const updateOptions = {
   new: true,
   runValidators: true
@@ -22,7 +23,7 @@ function updateTask (req, res, next) {
 
   function sendEvent (task) {
     return new Promise((fulfill, reject) => {
-      const queue = kue.createQueue();
+      const queue = kue.createQueue(configuration.queue);
       const job = queue.create('taskUpdated', task.toObject());
 
       job.save(err => err ? reject(err) : fulfill(task));

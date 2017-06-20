@@ -3,6 +3,7 @@
 const createError = require('http-errors');
 const kue = require('kue');
 const Task = require('../../models/task');
+const configuration = require('../../configuration');
 
 function createTask (req, res, next) {
   const task = new Task(req.body);
@@ -16,7 +17,7 @@ function createTask (req, res, next) {
 
   function sendEvent (task) {
     return new Promise((fulfill, reject) => {
-      const queue = kue.createQueue();
+      const queue = kue.createQueue(configuration.queue);
       const job = queue.create('taskCreated', task.toObject());
 
       job.save(err => err ? reject(err) : fulfill(task));

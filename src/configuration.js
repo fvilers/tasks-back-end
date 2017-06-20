@@ -7,6 +7,13 @@ const configuration = {
   json: {
     limit: process.env.JSON_LIMIT || "2mb"
   },
+  queue: {
+    prefix: "queue",
+    redis: {
+      port: 6379,
+      host: process.env.REDIS_HOST || "localhost"
+    }
+  },
   mongo: {
     uri: process.env.MONGO_URI || "mongodb://localhost/tasks",
     options: {
