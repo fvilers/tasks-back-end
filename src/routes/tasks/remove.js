@@ -1,6 +1,7 @@
 'use strict';
 
 const createError = require('http-errors');
+const kue = require('kue');
 const Task = require('../../models/task');
 
 function removeTask (req, res, next) {
@@ -10,9 +11,19 @@ function removeTask (req, res, next) {
   };
 
   Task.findOneAndRemove(query)
+    .then(sendEvent)
     .then(sendResponse)
     .catch(next)
   ;
+
+  function sendEvent (task) {
+    return new Promise((fulfill, reject) => {
+      const queue = kue.createQueue();
+      const job = queue.create('taskRemoved', task);
+
+      job.save(err => err ? reject(err) : fulfill(task));
+    });
+  }
 
   function sendResponse (task) {
     if (!task) {
