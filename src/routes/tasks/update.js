@@ -23,7 +23,7 @@ function updateTask (req, res, next) {
   function sendEvent (task) {
     return new Promise((fulfill, reject) => {
       const queue = kue.createQueue();
-      const job = queue.create('taskUpdated', task);
+      const job = queue.create('taskUpdated', task.toObject());
 
       job.save(err => err ? reject(err) : fulfill(task));
     });
