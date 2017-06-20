@@ -1,6 +1,7 @@
 'use strict';
 
 const createError = require('http-errors');
+const kue = require('kue');
 const Task = require('../../models/task');
 const updateOptions = {
   new: true,
@@ -14,9 +15,19 @@ function updateTask (req, res, next) {
   };
 
   Task.findOneAndUpdate(query, req.body, updateOptions)
+    .then(sendEvent)
     .then(sendResponse)
     .catch(onError)
   ;
+
+  function sendEvent (task) {
+    return new Promise((fulfill, reject) => {
+      const queue = kue.createQueue();
+      const job = queue.create('taskUpdated', task);
+
+      job.save(err => err ? reject(err) : fulfill(task));
+    });
+  }
 
   function sendResponse (task) {
     if (!task) {
