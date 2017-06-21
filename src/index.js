@@ -23,7 +23,18 @@ app.use((err, req, res, next) => res.status(err.status || 500).send(err));
 
 // MongoDB
 mongoose.Promise = global.Promise;
-mongoose.connect(configuration.mongo.uri, configuration.mongo.options);
+connectToMongo(250)
 process.on('SIGTERM', () => mongoose.connection.close(() => process.exit(0)));
 
 module.exports = app;
+
+function connectToMongo (delay) {
+  mongoose.connect(configuration.mongo.uri, configuration.mongo.options)
+    .then(() => console.info('Connected to MongoDB.'))
+    .catch(() => {
+      delay *= 2;
+      console.error(`Connection to MongoDB failed, retrying in ${delay} ms.`)
+      setTimeout(() => connectToMongo(delay), delay)
+    })
+  ;
+}
